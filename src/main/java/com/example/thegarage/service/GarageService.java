@@ -9,6 +9,7 @@ import com.example.thegarage.model.Garage;
 import com.example.thegarage.model.Vehicle;
 import com.example.thegarage.repository.GarageRepository;
 import com.example.thegarage.repository.VehicleRepository;
+import com.example.thegarage.model.Location;
 
 
 @Service
@@ -19,15 +20,33 @@ public class GarageService {
     @Autowired
     private VehicleRepository vehicles;
 
-    public void enter(Garage garage, Vehicle vehicle) {
-        // TODO
+    public Location enter(Long garageId, String vehicleId) {
+        Garage garage = this.garages.findById(garageId);
+        Vehicle vehicle = this.vehicles.findById(vehicleId);
+
+        if (garage == null) {
+            // TODO raise not found
+        }
+        if (vehicle == null) {
+            // TODO raise not found
+        }
+
+        return garage.assign(vehicle);
     }
 
-    public void exit(Vehicle vehicle) {
-        // TODO
+    public void exit(String vehicleId) {
+        Vehicle vehicle = this.vehicles.findById(vehicleId);
+        if (vehicle == null) {
+            // TODO raise not found
+        }
+        vehicle.exit();
     }
 
-    public void locate(Vehicle vehicle) {
-        // TODO
+    public Location locate(String vehicleId) {
+        Vehicle vehicle = this.vehicles.findById(vehicleId);
+        if (vehicle == null) {
+            // TODO raise not found
+        }
+        return vehicle.locate();
     }
 }
