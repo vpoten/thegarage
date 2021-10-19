@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.HashMap;
 
-import com.example.thegarage.model.Vehicle;
+import com.example.thegarage.entity.Vehicle;
 
 @Repository
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)

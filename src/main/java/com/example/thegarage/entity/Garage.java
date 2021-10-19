@@ -1,4 +1,6 @@
-package com.example.thegarage.model;
+package com.example.thegarage.entity;
+
+import com.example.thegarage.model.Location;
 
 public class Garage {
     protected Long id;

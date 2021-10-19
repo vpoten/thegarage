@@ -5,11 +5,13 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import com.example.thegarage.model.Garage;
-import com.example.thegarage.model.Vehicle;
+import com.example.thegarage.entity.Garage;
+import com.example.thegarage.entity.Vehicle;
 import com.example.thegarage.repository.GarageRepository;
 import com.example.thegarage.repository.VehicleRepository;
 import com.example.thegarage.model.Location;
+import com.example.thegarage.model.GarageInput;
+import com.example.thegarage.model.VehicleInput;
 import com.example.thegarage.exception.NoSuchElementFoundException;
 
 
@@ -37,14 +39,26 @@ public class GarageService {
         return vehicle;
     }
 
+    public Garage addGarage(GarageInput data) {
+        // TODO
+        return null;
+    }
+
+    public Vehicle addVehicle(VehicleInput data) {
+        // TODO
+        return null;
+    }
+
     public Location enter(Long garageId, String vehicleId) {
         Garage garage = this.getGarage(garageId);
         Vehicle vehicle = this.getVehicle(vehicleId);
+        // TODO
         return garage.assign(vehicle);
     }
 
     public void exit(String vehicleId) {
         Vehicle vehicle = this.getVehicle(vehicleId);
+        // TODO
         vehicle.exit();
     }
 

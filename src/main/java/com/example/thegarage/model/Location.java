@@ -1,17 +1,9 @@
 package com.example.thegarage.model;
 
 public class Location {
-    protected Garage garage;
+    protected Long garageId;
     protected int level;
     protected int lot;
-
-    public Garage getGarage() {
-        return garage;
-    }
-
-    public void setGarage(Garage garage) {
-        this.garage = garage;
-    }
 
     public int getLevel() {
         return level;
@@ -27,5 +19,13 @@ public class Location {
 
     public void setLot(int lot) {
         this.lot = lot;
+    }
+
+    public Long getGarageId() {
+        return garageId;
+    }
+
+    public void setGarageId(Long garageId) {
+        this.garageId = garageId;
     }
 }

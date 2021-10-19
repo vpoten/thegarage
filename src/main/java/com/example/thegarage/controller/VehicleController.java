@@ -1,24 +1,33 @@
 package com.example.thegarage.controller;
 
+import com.example.thegarage.model.Location;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.thegarage.model.Vehicle;
+import com.example.thegarage.service.GarageService;
+import com.example.thegarage.entity.Vehicle;
+import com.example.thegarage.model.VehicleInput;
 
 @RestController
 @RequestMapping("/api/vehicle")
 public class VehicleController {
+    @Autowired
+    private GarageService garageService;
 
     @GetMapping(value = "/{id}")
     public Vehicle findById(@PathVariable("id") String id) {
-        // TODO
-        return null;
+        return garageService.getVehicle(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestBody Vehicle data) {
-        // TODO
-        return null;
+    public Vehicle create(@RequestBody VehicleInput data) {
+        return garageService.addVehicle(data);
+    }
+
+    @GetMapping(value = "/{id}/locate")
+    public Location locate(@PathVariable("id") String id) {
+        return garageService.locate(id);
     }
 }
