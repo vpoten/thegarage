@@ -3,32 +3,48 @@ package com.example.thegarage.entity;
 import com.example.thegarage.model.Location;
 
 public class Garage {
-    protected Long id;
-    protected int levels;
-    protected int spacesPerLevel;
+    private Long id;
+    private int levels;
+    private int spacesPerLevel;
+    private Vehicle[][] assignations;
 
     public Garage(Long id, int levels, int spacesPerLevel) {
         this.id = id;
         this.levels = levels;
         this.spacesPerLevel = spacesPerLevel;
+        this.assignations = new Vehicle[this.levels][this.spacesPerLevel];
+        this.clearLocations();
     }
 
     public Long getId() {
         return id;
     }
 
-    public boolean free(Vehicle vehicle) {
-        // TODO
-        return false;
+    public void free(Location location) {
+        this.assignations[location.getLevel()][location.getLot()] = null;
     }
 
-    public Location assign(Vehicle vehicle) {
-        // TODO
-        return null;
+    public void assign(Location location, Vehicle vehicle) {
+        this.assignations[location.getLevel()][location.getLot()] = vehicle;
     }
 
-    public Location locate(Vehicle vehicle) {
-        // TODO
+    private void clearLocations() {
+        for (int i = 0; i < this.levels; i++) {
+            for (int j = 0; j < this.spacesPerLevel; j++) {
+                this.assignations[i][j] = null;
+            }
+        }
+    }
+
+    public Location getFirstFreeLocation() {
+        for (int i = 0; i < this.levels; i++) {
+            for (int j = 0; j < this.spacesPerLevel; j++) {
+                if (this.assignations[i][j] == null) {
+                    return new Location(this.id, i, j);
+                }
+            }
+        }
+
         return null;
     }
 }

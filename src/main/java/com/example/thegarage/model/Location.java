@@ -5,6 +5,12 @@ public class Location {
     protected int level;
     protected int lot;
 
+    public Location(Long garageId, int level, int lot) {
+        this.garageId = garageId;
+        this.level = level;
+        this.lot = lot;
+    }
+
     public int getLevel() {
         return level;
     }

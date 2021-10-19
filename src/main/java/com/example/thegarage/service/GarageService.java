@@ -1,5 +1,6 @@
 package com.example.thegarage.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.thegarage.entity.Garage;
 import com.example.thegarage.entity.Vehicle;
+import com.example.thegarage.entity.VehicleFactory;
 import com.example.thegarage.repository.GarageRepository;
 import com.example.thegarage.repository.VehicleRepository;
 import com.example.thegarage.model.Location;
@@ -40,26 +42,42 @@ public class GarageService {
     }
 
     public Garage addGarage(GarageInput data) {
-        // TODO
-        return null;
+        Garage garage = new Garage(data.getId(), data.getLevels(), data.getSpacesPerLevel());
+        this.garages.insert(garage);
+        return garage;
     }
 
     public Vehicle addVehicle(VehicleInput data) {
-        // TODO
-        return null;
+        Vehicle vehicle = VehicleFactory.create(data);
+        vehicles.insert(vehicle);
+        return vehicle;
     }
 
     public Location enter(Long garageId, String vehicleId) {
         Garage garage = this.getGarage(garageId);
         Vehicle vehicle = this.getVehicle(vehicleId);
-        // TODO
-        return garage.assign(vehicle);
+        Location location = garage.getFirstFreeLocation();
+
+        if (location == null) {
+            return null;
+        }
+
+        garage.assign(location, vehicle);
+        vehicle.setLocation(location);
+        return location;
     }
 
     public void exit(String vehicleId) {
         Vehicle vehicle = this.getVehicle(vehicleId);
-        // TODO
+        Location location = vehicle.getLocation();
+
+        if (location == null) {
+            // TODO raise exception
+        }
+
+        Garage garage = this.getGarage(location.getGarageId());
         vehicle.exit();
+        garage.free(location);
     }
 
     public Location locate(String vehicleId) {
