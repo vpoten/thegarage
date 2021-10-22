@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.thegarage.entity.Garage;
 import com.example.thegarage.model.GarageInput;
+import com.example.thegarage.model.Location;
 
 @RestController
 @RequestMapping("/api/garage")
@@ -24,6 +25,11 @@ public class GarageController {
     @ResponseStatus(HttpStatus.CREATED)
     public Garage create(@RequestBody GarageInput data) {
         return garageService.addGarage(data);
+    }
+
+    @PostMapping(value = "/{garageId}/enter/{vehicleId}")
+    public Location enter(@PathVariable("garageId") Long garageId, @PathVariable("vehicleId") String vehicleId) {
+        return garageService.enter(garageId, vehicleId);
     }
 
 }

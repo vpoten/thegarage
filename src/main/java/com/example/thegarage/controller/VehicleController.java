@@ -30,4 +30,10 @@ public class VehicleController {
     public Location locate(@PathVariable("id") String id) {
         return garageService.locate(id);
     }
+
+    @PostMapping(value = "/{id}/exit")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void exit(@PathVariable("id") String id) {
+        garageService.exit(id);
+    }
 }

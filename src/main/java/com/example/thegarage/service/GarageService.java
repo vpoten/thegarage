@@ -15,6 +15,7 @@ import com.example.thegarage.model.Location;
 import com.example.thegarage.model.GarageInput;
 import com.example.thegarage.model.VehicleInput;
 import com.example.thegarage.exception.NoSuchElementFoundException;
+import com.example.thegarage.exception.LocationError;
 
 
 @Service
@@ -56,6 +57,13 @@ public class GarageService {
     public Location enter(Long garageId, String vehicleId) {
         Garage garage = this.getGarage(garageId);
         Vehicle vehicle = this.getVehicle(vehicleId);
+
+        Location currentLocation = vehicle.getLocation();
+
+        if (currentLocation != null) {
+            throw new LocationError("The vehicle is already in a garage");
+        }
+
         Location location = garage.getFirstFreeLocation();
 
         if (location == null) {
@@ -72,7 +80,7 @@ public class GarageService {
         Location location = vehicle.getLocation();
 
         if (location == null) {
-            // TODO raise exception
+            throw new LocationError("The vehicle is not located in a garage");
         }
 
         Garage garage = this.getGarage(location.getGarageId());
