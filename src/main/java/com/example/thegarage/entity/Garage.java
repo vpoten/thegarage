@@ -40,7 +40,7 @@ public class Garage {
         for (int i = 0; i < this.getLevels(); i++) {
             for (int j = 0; j < this.getSpacesPerLevel(); j++) {
                 if (this.assignations[i][j] == null) {
-                    return new Location(this.id, i, j);
+                    return new Location(this.getId(), i, j);
                 }
             }
         }

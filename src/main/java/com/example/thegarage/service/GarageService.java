@@ -50,7 +50,7 @@ public class GarageService {
 
     public Vehicle addVehicle(VehicleInput data) {
         Vehicle vehicle = VehicleFactory.create(data);
-        vehicles.insert(vehicle);
+        this.vehicles.insert(vehicle);
         return vehicle;
     }
 
@@ -67,7 +67,7 @@ public class GarageService {
         Location location = garage.getFirstFreeLocation();
 
         if (location == null) {
-            return null;
+            throw new LocationError("The garage is full");
         }
 
         garage.assign(location, vehicle);

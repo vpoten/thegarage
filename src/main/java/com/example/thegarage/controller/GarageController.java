@@ -1,11 +1,11 @@
 package com.example.thegarage.controller;
 
 
-import com.example.thegarage.service.GarageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.thegarage.service.GarageService;
 import com.example.thegarage.model.GarageInput;
 import com.example.thegarage.model.Location;
 import com.example.thegarage.model.GarageOutput;
