@@ -12,7 +12,7 @@ public class Garage {
         this.id = id;
         this.levels = levels;
         this.spacesPerLevel = spacesPerLevel;
-        this.assignations = new Vehicle[this.levels][this.spacesPerLevel];
+        this.assignations = new Vehicle[this.getLevels()][this.getSpacesPerLevel()];
         this.clearLocations();
     }
 
@@ -29,16 +29,16 @@ public class Garage {
     }
 
     private void clearLocations() {
-        for (int i = 0; i < this.levels; i++) {
-            for (int j = 0; j < this.spacesPerLevel; j++) {
+        for (int i = 0; i < this.getLevels(); i++) {
+            for (int j = 0; j < this.getSpacesPerLevel(); j++) {
                 this.assignations[i][j] = null;
             }
         }
     }
 
     public Location getFirstFreeLocation() {
-        for (int i = 0; i < this.levels; i++) {
-            for (int j = 0; j < this.spacesPerLevel; j++) {
+        for (int i = 0; i < this.getLevels(); i++) {
+            for (int j = 0; j < this.getSpacesPerLevel(); j++) {
                 if (this.assignations[i][j] == null) {
                     return new Location(this.id, i, j);
                 }
@@ -46,5 +46,31 @@ public class Garage {
         }
 
         return null;
+    }
+
+    public int getLevels() {
+        return levels;
+    }
+
+    public int getSpacesPerLevel() {
+        return spacesPerLevel;
+    }
+
+    public int getTotalSpaces() {
+        return this.getLevels() * this.getSpacesPerLevel();
+    }
+
+    public int getFreeSpaces() {
+        int free = 0;
+
+        for (int i = 0; i < this.getLevels(); i++) {
+            for (int j = 0; j < this.getSpacesPerLevel(); j++) {
+                if (this.assignations[i][j] == null) {
+                    free++;
+                }
+            }
+        }
+
+        return free;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.thegarage.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +15,7 @@ import com.example.thegarage.model.GarageInput;
 import com.example.thegarage.model.VehicleInput;
 import com.example.thegarage.exception.NoSuchElementFoundException;
 import com.example.thegarage.exception.LocationError;
+import com.example.thegarage.model.GarageOutput;
 
 
 @Service
@@ -88,8 +88,8 @@ public class GarageService {
         garage.free(location);
     }
 
-    public Location locate(String vehicleId) {
-        Vehicle vehicle = this.getVehicle(vehicleId);
-        return vehicle.locate();
+    public GarageOutput toOutput(Garage garage) {
+        return new GarageOutput(garage.getId(), garage.getLevels(), garage.getSpacesPerLevel(), garage.getTotalSpaces(),
+                garage.getFreeSpaces());
     }
 }
